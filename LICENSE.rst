@@ -1,3 +1,5 @@
+License
+===============================================================================
 Copyright (c) 2014, Emmanuel Levijarvi
 All rights reserved.
 
