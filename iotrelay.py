@@ -118,7 +118,7 @@ class Relay(object):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="IoT Relay")
+    parser = argparse.ArgumentParser(description="Internet of Things Relay")
     parser.add_argument('-c', '--config-file', help="Configuration Filename")
     parser.add_argument('--log-level', help="Log Level", default='info',
                         choices=('debug', 'info', 'warning', 'info'))
