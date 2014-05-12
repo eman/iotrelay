@@ -16,7 +16,7 @@ try:
 except ImportError:
     import ConfigParser as configparser
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 
 DEFAULT_CONFIG = os.path.join(os.path.expanduser("~"), '.iotrelay.cfg')
 GROUP = 'iotrelay'
@@ -58,7 +58,9 @@ class Reading(object):
         return self
 
     def __str__(self):
-        return "{0!s}, {1!s}".format(self.timestamp.isoformat(), self.value)
+        return "{0}: {1!s}, {2!s}".format(self.series_key,
+                                          self.timestamp.isoformat(),
+                                          self.value)
 
     def __repr__(self):
         return ("Reading({self.reading_type!r}, {self.value!r}, "
