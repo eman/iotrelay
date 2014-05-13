@@ -103,6 +103,10 @@ class Relay(object):
             for source in self.sources:
                 for reading in source.get_readings():
                     for handler in self.handlers.get(reading.reading_type, []):
+                        if reading.value is None:
+                            logger.warning('None value from {0}'.format(
+                                reading.series_key))
+                            continue
                         handler.set_reading(reading)
             self.stop_event.wait(1)
 
@@ -125,7 +129,6 @@ def main():
     parser.add_argument('--log-level', help="Log Level", default='info',
                         choices=('debug', 'info', 'warning', 'info'))
     args = parser.parse_args()
-    logging.basicConfig(format='%(message)s', level=args.log_level.upper())
     config = ConfigParser(allow_no_value=True)
     if args.config_file is None:
         config_file = DEFAULT_CONFIG
@@ -133,6 +136,7 @@ def main():
         config_file = args.config_file
     with open(config_file, 'r') as f:
         config.readfp(f)
+    logging.basicConfig(format='%(message)s', level=args.log_level.upper())
     r = Relay(config)
     r.load_plugins()
     r.run()
