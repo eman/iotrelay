@@ -88,7 +88,7 @@ class Relay(object):
             plugin = entrypoint.load()(plugin_config)
             if entrypoint.name == 'handler':
                 for reading_type in self.config.getlist(plugin_name,
-                                                        'reading_types'):
+                                                        'reading types'):
                     self.handlers[reading_type].append(plugin)
             elif entrypoint.name == 'source':
                 self.sources.append(plugin)
