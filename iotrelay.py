@@ -20,7 +20,7 @@ logger = logging.getLogger()
 
 DEFAULT_CONFIG = os.path.join(os.path.expanduser("~"), '.iotrelay.cfg')
 GROUP = 'iotrelay'
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 class ConfigParser(configparser.SafeConfigParser):
