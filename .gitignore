@@ -1,0 +1,7 @@
+dist
+build
+iotrelay.egg-info
+*.pyc
+*.egg
+.tox
+.DS_Store
