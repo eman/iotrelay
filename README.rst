@@ -53,8 +53,6 @@ Sample Handler::
 
         def set_reading(self, reading):
             print('set_reading({0!r})'.format(reading))
-            if reading is None:
-                return
             self.readings.append(reading)
             if len(self.readings) == self.batch_len:
                 for item in self.readings:
