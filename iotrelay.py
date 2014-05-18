@@ -58,8 +58,8 @@ class Reading(object):
         return self
 
     def __str__(self):
-        return "{0}: {1!s}, {2!s}".format(self.series_key,
-                                          self.timestamp.isoformat(),
+        return "{0}: {1!s}, {2!s}".format(self.timestamp.isoformat(),
+                                          self.series_key,
                                           self.value)
 
     def __repr__(self):
@@ -77,6 +77,7 @@ class Relay(object):
         self.handlers = defaultdict(list)
 
     def load_plugins(self):
+        logger.debug('IoTrelay loading plugins')
         for entrypoint in pkg_resources.iter_entry_points(group=GROUP):
             plugin_name = entrypoint.dist.project_name
             try:
@@ -87,9 +88,15 @@ class Relay(object):
                 continue
             plugin = entrypoint.load()(plugin_config)
             if entrypoint.name == 'handler':
-                for reading_type in self.config.getlist(plugin_name,
-                                                        'reading types'):
-                    self.handlers[reading_type].append(plugin)
+                try:
+                    reading_types = self.config.getlist(plugin_name,
+                                                        'reading types')
+                except configparser.NoSectionError:
+                    msg = "No 'reading type' specified for handler {0}"
+                    logger.warning(msg.format(plugin_name))
+                else:
+                    for reading_type in reading_types:
+                        self.handlers[reading_type].append(plugin)
             elif entrypoint.name == 'source':
                 self.sources.append(plugin)
             logger.debug("Plugin: {0}.{1}, loaded".format(plugin_name,
@@ -129,14 +136,15 @@ def main():
     parser.add_argument('--log-level', help="Log Level", default='info',
                         choices=('debug', 'info', 'warning', 'info'))
     args = parser.parse_args()
-    config = ConfigParser(allow_no_value=True)
+    config = ConfigParser()
     if args.config_file is None:
         config_file = DEFAULT_CONFIG
     else:
         config_file = args.config_file
     with open(config_file, 'r') as f:
         config.readfp(f)
-    logging.basicConfig(format='%(message)s', level=args.log_level.upper())
+    logging.basicConfig(format='%(asctime)s %(message)s',
+                        level=args.log_level.upper())
     r = Relay(config)
     r.load_plugins()
     r.run()
