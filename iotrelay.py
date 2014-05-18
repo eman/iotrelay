@@ -20,7 +20,7 @@ logger = logging.getLogger()
 
 DEFAULT_CONFIG = os.path.join(os.path.expanduser("~"), '.iotrelay.cfg')
 GROUP = 'iotrelay'
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 class ConfigParser(configparser.SafeConfigParser):
@@ -108,7 +108,10 @@ class Relay(object):
     def run(self):
         while not self.stop_event.is_set():
             for source in self.sources:
-                for reading in source.get_readings():
+                readings = source.get_readings()
+                if readings is None:
+                    continue
+                for reading in readings:
                     for handler in self.handlers.get(reading.reading_type, []):
                         if reading.value is None:
                             logger.warning('None value from {0}'.format(
