@@ -45,7 +45,7 @@ Creating a data handler plugin
 Sample Handler::
 
     class Handler(object):
-       batch_len = 10
+        batch_len = 10
 
         def __init__(self, config):
             self.readings = []
