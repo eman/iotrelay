@@ -93,9 +93,9 @@ Install the source plugin by typing:
 
 Data Handler Sample Plugin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Like the previous example, the create two files:
-``iotrelay_sample_handler.py`` and ``setup.py`` and place them in the
-same directory.
+Like the previous example, create a new directory with two files:
+
+``iotrelay_sample_handler.py``
 
 .. code-block:: python
 
@@ -106,7 +106,7 @@ same directory.
         def set_reading(self, reading):
             print(reading)
 
-Sample ``setup.py`` for the handler plugin.
+``setup.py``
 
 .. code-block:: python
 
