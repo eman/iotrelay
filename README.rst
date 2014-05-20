@@ -1,4 +1,4 @@
-Internet of Things Relay: Giving Voice to Your Things
+IoT Relay: Giving Voice to Your Things
 ========================================================================
 Release v1.0.1
 
