@@ -15,9 +15,9 @@ Available Plugins
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ===============================================================  ===================================================
-`iotrelay-tempodb <https://github.com/eman/iotrelay-tempodb>`_   A handler for sending data to TempoDB              
-`iotrelay-eagle <https://github.com/eman/iotrelay-eagle>`_       Pull data from an Eagle Home Energy Gateway        
-`iotrelay-pywws <https://github.com/eman/iotrelay-pywws>`_       Pull weather data from a weather station via pywws 
+`iotrelay-tempodb <https://github.com/eman/iotrelay-tempodb>`_   A handler for sending data to TempoDB
+`iotrelay-eagle <https://github.com/eman/iotrelay-eagle>`_       Pull data from an Eagle Home Energy Gateway
+`iotrelay-pywws <https://github.com/eman/iotrelay-pywws>`_       Pull weather data from a weather station via pywws
 ===============================================================  ===================================================
 
 Plugin Configuration
@@ -66,6 +66,8 @@ method and a constructor which accepts a ``config`` parameter. The
 
 .. code-block:: python
 
+    # iotrelay_sample_source.py
+
     import random
     from iotrelay import Reading
 
@@ -83,6 +85,8 @@ IoT Relay uses setuptools to find plugins registered in the
 the following code should be placed in ``setup.py``.
 
 .. code-block:: python
+
+    # setup.py
 
     from setuptools import setup
 
@@ -105,9 +109,9 @@ Data Handler Sample Plugin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Like the previous example, create a new directory with two files:
 
-``iotrelay_sample_handler.py``
-
 .. code-block:: python
+
+    # iotrelay_sample_handler.py
 
     class Handler(object):
         def __init__(self, config):
@@ -116,9 +120,10 @@ Like the previous example, create a new directory with two files:
         def set_reading(self, reading):
             print(reading)
 
-``setup.py``
 
 .. code-block:: python
+
+    # setup.py
 
     from setuptools import setup
 
