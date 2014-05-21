@@ -56,6 +56,8 @@ method and a constructor which accepts a ``config`` parameter. The
 
 .. code-block:: python
 
+    # iotrelay_sample_source.py
+
     import random
     from iotrelay import Reading
 
@@ -73,6 +75,8 @@ IoT Relay uses setuptools to find plugins registered in the
 the following code should be placed in ``setup.py``.
 
 .. code-block:: python
+
+    # setup.py
 
     from setuptools import setup
 
@@ -95,9 +99,9 @@ Data Handler Sample Plugin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Like the previous example, create a new directory with two files:
 
-``iotrelay_sample_handler.py``
-
 .. code-block:: python
+
+    # iotrelay_sample_handler.py
 
     class Handler(object):
         def __init__(self, config):
@@ -106,9 +110,9 @@ Like the previous example, create a new directory with two files:
         def set_reading(self, reading):
             print(reading)
 
-``setup.py``
-
 .. code-block:: python
+
+    # setup.py
 
     from setuptools import setup
 
@@ -120,7 +124,7 @@ Like the previous example, create a new directory with two files:
               'iotrelay': ['handler=iotrelay_sample_handler:Handler']
           }
     )
-    
+
 Install the handler plugin by typing:
 
 .. code-block:: bash
@@ -136,10 +140,13 @@ file ``~/.iotrelay.cfg``.
 
 .. code-block:: ini
 
+    ; ~/.iotrelay.cfg
+
     [iotrelay]
+
     [iotrelay-sample-source]
     [iotrelay-sample-handler]
-    
+
 Any options specified in each plugins section will be passed to that
 plugin's constructor during initialization.
 
@@ -154,4 +161,4 @@ Start IoT Relay with the following command:
 License
 ------------------------------------------------------------------------
 
-The project is licensed under the BSD license.
+Iot Relay is licensed under The BSD 2-Clause License.
