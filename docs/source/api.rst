@@ -13,7 +13,7 @@ API Documentation
         For eaxmple, a weather station might produce temperature,
         rainfall, and windspeed. Because all of these are related to
         weather, they could be categorized with a reading type of
-        "weater". ``reading_type`` is used to match data sources with
+        "weather". ``reading_type`` is used to match data sources with
         data handlers. If a data source generates readings with a
         ``reading_type`` of weather, data handlers that have registered
         an interest in weather will receive those readings.
