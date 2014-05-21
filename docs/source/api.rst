@@ -24,25 +24,25 @@ API Documentation
 
     .. py:attribute:: timestamp
 
-       A a datetime.datatime() object containing the UTC timestamp at
-       which the reading was taken.
+        A a datetime.datatime object containing the UTC timestamp at
+        which the reading was taken.
 
-       If no timestamp is specified in the constructor, timestamp is
-       set to the time the Reading object was created.
+        If no timestamp is specified in the constructor, timestamp is
+        set to the time the Reading object was created.
 
     .. py:attribute:: series_key
 
-       identifies an individual time series. A weather station may
-       produce multiple data streams, one for each sensor.
-       Each of these streams should have their own series key.
+        identifies an individual time series. A weather station may
+        produce multiple data streams, one for each sensor.
+        Each of these streams should have their own series key.
 
-       If a ``series_key`` is not specified in the constructor,
-       ``series_key`` is set to ``reading_type``.
+        If a ``series_key`` is not specified in the constructor,
+        ``series_key`` is set to ``reading_type``.
 
 .. py:class:: DataSource(config)
 
     DataSource is an abstract class for implementing data source plugins.
-    
+
     .. py:attribute:: config
 
         A dict containing key/value pairs corresponding to options taken
@@ -50,12 +50,12 @@ API Documentation
         ``~/.iotrelay.cfg``.
 
     .. py:function:: get_readings
-    
-       Get readings from a data source.
-       
-       :return: one or more Readings or no Reading
-       :rtype: Reading, an iterator of Readings, or None
-       
+
+        Get readings from a data source.
+
+        :return: one or more Readings or no Reading
+        :rtype: Reading, an iterator of Readings, or None
+
 Example Data Source
 
 .. code-block:: python
@@ -75,7 +75,7 @@ Example Data Source
 .. py:class:: Handler(config)
 
     Handler is an abstract class for implementing data handler plugins.
-    
+
     .. py:attribute:: config
 
         A dict containing key/value pairs corresponding to options taken
@@ -83,14 +83,14 @@ Example Data Source
         ``~/.iotrelay.cfg``.
 
     .. py:function:: set_reading(reading)
-    
+
         Send a reading to a handler.
-       
+
     :param iotrelay.Reading reading: The Reading instance being sent to the
         handler.
 
     .. py:function:: flush()
-    
+
         *Optional*: Flush any readings that have not been send or otherwise
         processed.
 
