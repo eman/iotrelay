@@ -37,10 +37,13 @@ iotrelay-sample-source and iotrelay-sample-handler plugins.
 
 .. code-block:: ini
 
+    ; ~/.iotrelay.cfg
+
     [iotrelay]
+
     [iotrelay-sample-source]
     [iotrelay-sample-handler]
-    
+
 Handler plugins must list the types of readings they're interested in.
 If a ``reading_type`` for a handler plugin is left unset, that plugin
 will not receive any readings. The following example shows that the
@@ -51,7 +54,10 @@ readings.
 
 .. code-block:: ini
 
+    ; ~/.iotrelay.cfg
+
     [iotrelay]
+
     [iotrelay-sample-handler]
     reading types = weather, power
 
