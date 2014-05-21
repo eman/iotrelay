@@ -2,6 +2,9 @@
 Copyright (c) 2014, Emmanuel Levijarvi
 All rights reserved.
 License BSD
+
+iotrelay.py provides an application and a framework for passing data
+between data sources and handlers.
 '''
 import argparse
 import datetime
@@ -24,15 +27,32 @@ __version__ = "1.0.1"
 
 
 class ConfigParser(configparser.SafeConfigParser):
+    '''ConfigParser is a subclass of the standard library's ConfigParser.
+
+    It adds the ability to parse an option as a list. See the Python
+    Standard Library Documentation for more.
+    '''
     @staticmethod
     def _make_list(value, sep):
         return [v.strip() for v in value.split(sep)]
 
     def getlist(self, section, option, sep=','):
+        '''Parse an option as a list, optionally specifying the separator
+        by specifying the sep argument.
+        '''
         return self._make_list(self.get(section, option), sep)
 
 
 class Reading(object):
+    '''Reading provides a container for passing a datum,or "Reading",
+    between sources and handlers.
+
+    Attributes:
+        reading_type (str): 
+        value (str):
+        timestamp (datetime.datetime):
+        series_key (str):
+    '''
     def __init__(self, reading_type, value, timestamp=None, series_key=None):
         self.reading_type = reading_type
         self.value = value

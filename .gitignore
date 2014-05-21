@@ -5,4 +5,5 @@ iotrelay.egg-info
 *.egg
 .tox
 *.swp
+*.pdf
 .DS_Store
