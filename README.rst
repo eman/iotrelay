@@ -1,8 +1,8 @@
-IoT Relay: Providing a Voice to Your Things
+IoT Relay: Giving Voice to Your Things
 ========================================================================
 Release v1.0.1
 
-In greater and greater number, "Things" are capable of gathering data
+In greater and greater numbers, "things" are capable of gathering data
 about their environment. These things have an interface to retrieve the
 measurements being taken but contain no way of pushing this data to the
 Internet. For example, home weather stations often contain only a USB
