@@ -130,10 +130,16 @@ Install the handler plugin by typing:
 
 Plugin Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-These minimal example plugins do not require any configuration but
-the do need to be enabled. To enable a plugin add a section with the
-plugin name, as defined in ``setup.py`` to the IoT Relay configuration
-file ``~/.iotrelay.cfg``.
+The minimal source plugin used in this example does not require any
+configuration. The 'reading types' option in a handler's configuration
+specifies which reading types a handler will receive. In order to
+receive readings from the 'iotrelay-sample-source' plugin, the
+'reading type' option in the iotrelay-sample-handler would be 'sample'.
+This corresponds to the reading_type attribute set by the Reading
+constructor when get_readings() was called.
+
+The section names correspond directly to the plugin names, as defined
+in ``setup.py``.
 
 .. code-block:: ini
 
@@ -143,6 +149,7 @@ file ``~/.iotrelay.cfg``.
 
     [iotrelay-sample-source]
     [iotrelay-sample-handler]
+    reading types = sample
 
 Any options specified in each plugins section will be passed to that
 plugin's constructor during initialization.
