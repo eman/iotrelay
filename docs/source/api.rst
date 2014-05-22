@@ -6,7 +6,6 @@ API Documentation
     Reading provides a container for passing a datum, or "Reading",
     between sources and handlers.
 
-
     .. py:attribute:: reading_type
 
         The reading type represents a category of readings.
@@ -24,8 +23,8 @@ API Documentation
 
     .. py:attribute:: timestamp
 
-        A a datetime.datatime object containing the UTC timestamp at
-        which the reading was taken.
+        A a datetime.datatime object containing the timestamp at which
+        the reading was taken.
 
         If no timestamp is specified in the constructor, timestamp is
         set to the time the Reading object was created.
@@ -69,7 +68,7 @@ Example Data Source
             self.config = config
 
         def get_readings(self):
-            return Reading('sample', random.randint(1, 100))
+            return Reading(reading_type='sample', value=random.randint(1, 100))
 
 
 .. py:class:: Handler(config)
