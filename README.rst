@@ -16,7 +16,6 @@ data from sources and relaying it to destinations.
 IoT Relay provides basic setup and matches data sources with interested
 handlers. The rest of the work is left to plugins.
 
-
 Installation
 ------------------------------------------------------------------------
 IoT Relay is available via PyPI.
@@ -31,7 +30,6 @@ file: ``~/.iotrelay.cfg``.
 .. code-block:: ini
 
     [itorelay]
-
 
 Plugins
 -----------------------------------------------------------------------
@@ -110,7 +108,6 @@ Like the previous example, create a new directory with two files:
         def set_reading(self, reading):
             print(reading)
 
-.. code-block:: python
 
     # setup.py
 
@@ -130,7 +127,7 @@ Install the handler plugin by typing:
 .. code-block:: bash
 
     $ python setup.py install
-    
+
 Plugin Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 These minimal example plugins do not require any configuration but
@@ -159,6 +156,6 @@ Start IoT Relay with the following command:
     $ iotrelay
 
 License
-------------------------------------------------------------------------
+-------------------------------------------------------------------------
 
-Iot Relay is licensed under The BSD 2-Clause License.
+IoT Relay is licensed under The BSD 2-Clause License.
