@@ -16,7 +16,7 @@ Available Plugins
 
 ===============================================================  ===================================================
 `iotrelay-tempodb <https://github.com/eman/iotrelay-tempodb>`_   A handler for sending data to TempoDB
-`iotrelay-eagle <https://github.com/eman/iotrelay-eagle>`_       Pull data from an Eagle Home Energy Gateway
+`iotrelay-eagle <https://github.com/eman/iotrelay-eagle>`_       Pull data from an Eagle™ Home Energy Gateway
 `iotrelay-pywws <https://github.com/eman/iotrelay-pywws>`_       Pull weather data from a weather station via pywws
 ===============================================================  ===================================================
 
@@ -59,8 +59,14 @@ readings.
     [iotrelay]
 
     [iotrelay-sample-handler]
-    reading types = weather, power
+    reading types = weather, power, random
 
+This example configuration file would cause the
+``iotrelay-sample-hanlder`` to receive data from three reading types:
+weather, power, and random. Weather and power reading types are
+produced by the plugins referenced earlier: ``iotrelay-pywws`` and
+``iotrelay-eagle``. Readings of type ``random`` are produced by the
+data source sample plugin shown in the next section.
 
 Data Source Sample Plugin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,40 +76,15 @@ method and a constructor which accepts a ``config`` parameter. The
 ``Reading()`` class or None. In this example,  create a file called
 ``iotrelay_sample_source.py`` and enter the following code.
 
-.. code-block:: python
-
-    # iotrelay_sample_source.py
-
-    import random
-    from iotrelay import Reading
-
-
-    class DataSource(object):
-        def __init__(self, config):
-            self.config = config
-
-        def get_readings(self):
-            return Reading('sample', random.randint(1, 100))
+.. literalinclude:: includes/source/iotrelay_sample_source.py
 
 IoT Relay uses setuptools to find plugins registered in the
 ``iotrelay`` group. Datasources should use the entry-point name
-``source``. In the same directory as ``iotrelay_sample_source.py``,
-the following code should be placed in ``setup.py``.
+``source``. The following configuration should be placed in
+``setup.py`` and in the same directory as
+``iotrelay_sample_source.py``.
 
-.. code-block:: python
-
-    # setup.py
-
-    from setuptools import setup
-
-
-    setup(name='iotrelay-sample-source',
-          install_requires=['iotrelay'],
-          py_modules=['iotrelay_sample_source'],
-          entry_points={
-              'iotrelay': ['source=iotrelay_sample_source:DataSource']
-          }
-    )
+.. literalinclude:: includes/source/setup.py
 
 Install the source plugin by typing:
 
@@ -115,32 +96,9 @@ Data Handler Sample Plugin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Like the previous example, create a new directory with two files:
 
-.. code-block:: python
+.. literalinclude:: includes/handler/iotrelay_sample_handler.py
 
-    # iotrelay_sample_handler.py
-
-    class Handler(object):
-        def __init__(self, config):
-            self.config = config
-
-        def set_reading(self, reading):
-            print(reading)
-
-
-.. code-block:: python
-
-    # setup.py
-
-    from setuptools import setup
-
-
-    setup(name='iotrelay-sample-handler',
-          install_requires=['iotrelay'],
-          py_modules=['iotrelay_sample_handler'],
-          entry_points={
-              'iotrelay': ['handler=iotrelay_sample_handler:Handler']
-          }
-    )
+.. literalinclude:: includes/handler/setup.py
 
 Install the handler plugin by typing:
 

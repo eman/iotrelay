@@ -23,7 +23,7 @@ logger = logging.getLogger()
 
 DEFAULT_CONFIG = os.path.join(os.path.expanduser("~"), '.iotrelay.cfg')
 GROUP = 'iotrelay'
-__version__ = "1.0.1"
+version = "1.0.1"
 
 
 class ConfigParser(configparser.SafeConfigParser):
@@ -48,7 +48,7 @@ class Reading(object):
     between sources and handlers.
 
     Attributes:
-        reading_type (str): 
+        reading_type (str):
         value (str):
         timestamp (datetime.datetime):
         series_key (str):

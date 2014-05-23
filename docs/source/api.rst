@@ -1,42 +1,62 @@
 API Documentation
 =======================================================================
 
-.. py:class:: iotrelay.Reading(reading_type, value[, timestamp[, series_key]])
+.. py:module:: iotrelay
+
+Constants
+-----------------------------------------------------------------------
+
+.. data:: version
+
+    The version number of the iotrelay module, as a string.
+
+.. data:: DEFAULT_CONFIG
+
+    The configuration file name and path to use if one is not specified.
+
+.. data:: GROUP
+
+    The setuptools group to inspect for available plugins.
+
+Classes
+------------------------------------------------------------------------
+
+.. py:class:: Reading(reading_type, value[, timestamp[, series_key]])
 
     Reading provides a container for passing a datum, or "Reading",
     between sources and handlers.
 
     .. py:attribute:: reading_type
 
-        The reading type represents a category of readings.
-        For eaxmple, a weather station might produce temperature,
-        rainfall, and windspeed. Because all of these are related to
-        weather, they could be categorized with a reading type of
-        "weather". ``reading_type`` is used to match data sources with
-        data handlers. If a data source generates readings with a
-        ``reading_type`` of weather, data handlers that have registered
-        an interest in weather will receive those readings.
+       represents a category of readings. For example, a weather
+       station might produce temperature, rainfall, and wind speed.
+       Because all of these are related to weather, they could be
+       categorized with a reading type of "weather".
+       :attr:`reading_type` is used to match data sources with data
+       handlers. If a data source generates readings with a
+       :attr:`reading_type`  of weather, data handlers that have
+       registered an interest in weather will receive those readings.
 
     .. py:attribute:: value
 
-        contains the datum being communicated.
+       contains the datum being communicated.
 
     .. py:attribute:: timestamp
 
-        A a datetime.datatime object containing the timestamp at which
-        the reading was taken.
+       A a :mod:`datetime` object containing the
+       time stamp at which the reading was taken.
 
-        If no timestamp is specified in the constructor, timestamp is
-        set to the time the Reading object was created.
+       If no time stamp is specified in the constructor, timestamp is
+       set to the time the :py:obj:`Reading` object was created.
 
     .. py:attribute:: series_key
 
-        identifies an individual time series. A weather station may
-        produce multiple data streams, one for each sensor.
-        Each of these streams should have their own series key.
+       identifies an individual time series. A weather station may
+       produce multiple data streams, one for each sensor.
+       Each of these streams should have their own series key.
 
-        If a ``series_key`` is not specified in the constructor,
-        ``series_key`` is set to ``reading_type``.
+       If a :attr:`series_key` is not specified in the constructor,
+       :attr:`series_key` is set to :attr:`reading_type`.
 
 .. py:class:: DataSource(config)
 
@@ -44,32 +64,21 @@ API Documentation
 
     .. py:attribute:: config
 
-        A dict containing key/value pairs corresponding to options taken
-        from the plugin's section in iotrelay's config file,
-        ``~/.iotrelay.cfg``.
+       A dict containing key/value pairs corresponding to options taken
+       from the plugin's section in iotrelay's config file,
+       ``~/.iotrelay.cfg``.
 
-    .. py:function:: get_readings
+    .. py:method:: get_readings
 
-        Get readings from a data source.
+       Get readings from a data source.
 
-        :return: one or more Readings or no Reading
-        :rtype: Reading, an iterator of Readings, or None
+       :return: one or more Readings or no :py:class:`Reading`
+       :rtype: :py:class:`Reading`, an iterable of :py:class:`Reading`
+           instances, or None
 
-Example Data Source
+    Example Data Source:
 
-.. code-block:: python
-
-    import random
-    from iotrelay import Reading
-
-
-    class DataSource(object):
-        def __init__(self, config):
-            self.config = config
-
-        def get_readings(self):
-            return Reading(reading_type='sample', value=random.randint(1, 100))
-
+    .. literalinclude:: includes/source/iotrelay_sample_source.py
 
 .. py:class:: Handler(config)
 
@@ -77,29 +86,22 @@ Example Data Source
 
     .. py:attribute:: config
 
-        A dict containing key/value pairs corresponding to options taken
-        from the plugin's section in iotrelay's config file,
-        ``~/.iotrelay.cfg``.
+       A dict containing key/value pairs corresponding to options taken
+       from the plugin's section in iotrelay's config file,
+       ``~/.iotrelay.cfg``.
 
-    .. py:function:: set_reading(reading)
+    .. py:method:: set_reading(reading)
 
-        Send a reading to a handler.
+       Send a reading to a handler.
 
-    :param iotrelay.Reading reading: The Reading instance being sent to the
-        handler.
+       :param iotrelay.Reading reading: The Reading instance being sent
+           to the handler.
 
     .. py:function:: flush()
 
-        *Optional*: Flush any readings that have not been send or otherwise
-        processed.
+       *Optional*: Flush any readings that have not been sent or otherwise
+       processed.
 
-Example Data Handler
+    Example Data Handler:
 
-.. code-block:: python
-
-    class Handler(object):
-        def __init__(self, config):
-            self.config = config
-
-        def set_reading(self, reading):
-            print(reading)
+    .. literalinclude:: includes/handler/iotrelay_sample_handler.py
