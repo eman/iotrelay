@@ -27,6 +27,14 @@ GROUP = 'iotrelay'
 version = "1.0.1"
 
 
+class Error(Exception):
+    pass
+
+
+class PluginError(Error):
+    pass
+
+
 class ConfigParser(configparser.SafeConfigParser):
     '''ConfigParser is a subclass of the standard library's ConfigParser.
 
@@ -129,7 +137,11 @@ class Relay(object):
     def run(self):
         while not self.stop_event.is_set():
             for source in self.sources:
-                readings = source.get_readings()
+                try:
+                    readings = source.get_readings()
+                except PluginError as e:
+                    logger.error('Unable to read from source. {0}'.format(e))
+                    continue
                 if readings is None:
                     continue
                 for reading in readings:
@@ -138,7 +150,10 @@ class Relay(object):
                             logger.warning('None value from {0}'.format(
                                 reading.series_key))
                             continue
-                        handler.set_reading(reading)
+                        try:
+                            handler.set_reading(reading)
+                        except PluginError as e:
+                            logger.error('Unable to send data {0}'.format(e))
             self.stop_event.wait(1)
 
     def flush_handlers(self):
