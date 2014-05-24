@@ -11,6 +11,7 @@ import datetime
 from collections import defaultdict
 import pkg_resources
 import os
+import sys
 import signal
 import threading
 import logging
@@ -159,15 +160,21 @@ def main():
     parser.add_argument('--log-level', help="Log Level", default='info',
                         choices=('debug', 'info', 'warning', 'info'))
     args = parser.parse_args()
+    logging.basicConfig(format='%(asctime)s %(message)s',
+                        level=args.log_level.upper())
     config = ConfigParser()
     if args.config_file is None:
         config_file = DEFAULT_CONFIG
     else:
         config_file = args.config_file
-    with open(config_file, 'r') as f:
+    try:
+        f = open(config_file, 'r')
+    except IOError as e:
+        logger.critical("Cannot open config file {0}. {1}.".format(e.filename,
+                                                                   e.strerror))
+        sys.exit(1)
+    with f:
         config.readfp(f)
-    logging.basicConfig(format='%(asctime)s %(message)s',
-                        level=args.log_level.upper())
     r = Relay(config)
     r.load_plugins()
     r.run()
