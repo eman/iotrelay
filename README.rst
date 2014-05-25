@@ -11,7 +11,10 @@ capability, such as ZigBee®, but still don't have a direct way to send
 data to Internet connected hosts.
 
 Internet of Things Relay is an application and framework for gathering
-data from sources and relaying it to destinations.
+data from sources and relaying it to destinations. It is somewhat like
+publish/subscribe except that it's geared more toward devices that are
+unable to initiate a connection (they must be polled to get at their
+data).
 
 IoT Relay provides basic setup and matches data sources with interested
 handlers. The rest of the work is left to plugins.

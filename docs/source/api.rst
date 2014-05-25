@@ -46,7 +46,7 @@ Classes
        A a :mod:`datetime` object containing the
        time stamp at which the reading was taken.
 
-       If no time stamp is specified in the constructor, timestamp is
+       If timestamp is not specified in the constructor, timestamp is
        set to the time the :py:obj:`Reading` object was created.
 
     .. py:attribute:: series_key
