@@ -111,8 +111,8 @@ class Relay(object):
                 try:
                     reading_types = self.config.getlist(plugin_name,
                                                         'reading types')
-                except configparser.NoSectionError:
-                    msg = "No 'reading type' specified for handler {0}"
+                except configparser.NoOptionError:
+                    msg = "No 'reading types' specified for handler {0}"
                     logger.warning(msg.format(plugin_name))
                 else:
                     for reading_type in reading_types:
