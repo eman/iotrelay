@@ -79,7 +79,7 @@ method and a constructor which accepts a ``config`` parameter. The
 .. literalinclude:: includes/source/iotrelay_sample_source.py
 
 IoT Relay uses setuptools to find plugins registered in the
-``iotrelay`` group. Datasources should use the entry-point name
+``iotrelay`` group. Data-sources should use the entry-point name
 ``source``. The following configuration should be placed in
 ``setup.py`` and in the same directory as
 ``iotrelay_sample_source.py``.

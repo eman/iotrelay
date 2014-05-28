@@ -11,6 +11,7 @@ import datetime
 from collections import defaultdict
 import pkg_resources
 import os
+import sys
 import signal
 import threading
 import logging
@@ -24,6 +25,14 @@ logger = logging.getLogger()
 DEFAULT_CONFIG = os.path.join(os.path.expanduser("~"), '.iotrelay.cfg')
 GROUP = 'iotrelay'
 version = "1.0.1"
+
+
+class Error(Exception):
+    pass
+
+
+class PluginError(Error):
+    pass
 
 
 class ConfigParser(configparser.SafeConfigParser):
@@ -128,7 +137,11 @@ class Relay(object):
     def run(self):
         while not self.stop_event.is_set():
             for source in self.sources:
-                readings = source.get_readings()
+                try:
+                    readings = source.get_readings()
+                except PluginError as e:
+                    logger.error('Unable to read from source. {0}'.format(e))
+                    continue
                 if readings is None:
                     continue
                 for reading in readings:
@@ -137,7 +150,10 @@ class Relay(object):
                             logger.warning('None value from {0}'.format(
                                 reading.series_key))
                             continue
-                        handler.set_reading(reading)
+                        try:
+                            handler.set_reading(reading)
+                        except PluginError as e:
+                            logger.error('Unable to send data {0}'.format(e))
             self.stop_event.wait(1)
 
     def flush_handlers(self):
@@ -159,15 +175,21 @@ def main():
     parser.add_argument('--log-level', help="Log Level", default='info',
                         choices=('debug', 'info', 'warning', 'info'))
     args = parser.parse_args()
+    logging.basicConfig(format='%(asctime)s %(message)s',
+                        level=args.log_level.upper())
     config = ConfigParser()
     if args.config_file is None:
         config_file = DEFAULT_CONFIG
     else:
         config_file = args.config_file
-    with open(config_file, 'r') as f:
+    try:
+        f = open(config_file, 'r')
+    except IOError as e:
+        logger.critical("Cannot open config file {0}. {1}.".format(e.filename,
+                                                                   e.strerror))
+        sys.exit(1)
+    with f:
         config.readfp(f)
-    logging.basicConfig(format='%(asctime)s %(message)s',
-                        level=args.log_level.upper())
     r = Relay(config)
     r.load_plugins()
     r.run()
