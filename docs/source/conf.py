@@ -52,7 +52,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'IoT Relay'
-copyright = '2014, Emmanuel Levijarvi'
+copyright = '2015, Emmanuel Levijarvi'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
