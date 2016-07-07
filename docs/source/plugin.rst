@@ -15,7 +15,7 @@ Available Plugins
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ===============================================================  ===================================================
-`iotrelay-tempodb <https://github.com/eman/iotrelay-tempodb>`_   A handler for sending data to TempoDB
+`iotrelay-influxdb <https://github.com/eman/iotrelay-influxdb>`_   A handler for sending data to InfluxDB
 `iotrelay-eagle <https://github.com/eman/iotrelay-eagle>`_       Pull data from an Eagle™ Home Energy Gateway
 `iotrelay-pywws <https://github.com/eman/iotrelay-pywws>`_       Pull weather data from a weather station via pywws
 ===============================================================  ===================================================
