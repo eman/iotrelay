@@ -12,7 +12,7 @@ for rst in ('README.rst', 'LICENSE.rst'):
         long_descriptions.append(f.read())
 
 setup(name='iotrelay',
-      version='1.0.1',
+      version='1.1.0',
       description=description,
       long_description='\n\n'.join(long_descriptions),
       author='Emmanuel Levijarvi',
