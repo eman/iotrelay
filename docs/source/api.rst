@@ -21,7 +21,7 @@ Constants
 Classes
 ------------------------------------------------------------------------
 
-.. py:class:: Reading(reading_type, value[, timestamp[, series_key]])
+.. py:class:: Reading(reading_type, value[, timestamp[, series_key[, tags]]])
 
     Reading provides a container for passing a datum, or "Reading",
     between sources and handlers.
@@ -57,6 +57,10 @@ Classes
 
        If a :attr:`series_key` is not specified in the constructor,
        :attr:`series_key` is set to :attr:`reading_type`.
+
+    .. py:attribute:: tags
+
+       a dictionary of key value pairs, describing the reading.
 
 .. py:class:: DataSource(config)
 
