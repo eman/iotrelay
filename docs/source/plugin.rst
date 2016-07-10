@@ -18,7 +18,7 @@ Available Plugins
 `iotrelay-influxdb <https://github.com/eman/iotrelay-influxdb>`_   A handler for sending data to InfluxDB
 `iotrelay-eagle <https://github.com/eman/iotrelay-eagle>`_         Pull data from an Eagle™ Home Energy Gateway
 `iotrelay-pywws <https://github.com/eman/iotrelay-pywws>`_         Pull weather data from a weather station via pywws
-`iotrelay-nest <https://github.com/eman/iotrelay-nest>`_           Pull temperature and humidity from Nest a thermostat
+`iotrelay-nest <https://github.com/eman/iotrelay-nest>`_           Pull temperature and humidity from a Nest thermostat
 =================================================================  ====================================================
 
 Plugin Configuration
