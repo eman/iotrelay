@@ -62,7 +62,8 @@ class Reading(object):
         timestamp (datetime.datetime):
         series_key (str):
     '''
-    def __init__(self, reading_type, value, timestamp=None, series_key=None):
+    def __init__(self, reading_type, value, timestamp=None, series_key=None,
+                 tags=None):
         self.reading_type = reading_type
         self.value = value
         self.series_key = series_key
@@ -72,6 +73,10 @@ class Reading(object):
             self.timestamp = datetime.datetime.utcnow()
         else:
             self.timestamp = timestamp
+        if tags is None:
+            self.tags = {}
+        else:
+            self.tags = tags
         self.iteration = False
 
     def __iter__(self):
