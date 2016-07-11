@@ -1,4 +1,5 @@
 '''
+
 Copyright (c) 2016, Emmanuel Levijarvi
 All rights reserved.
 License BSD
@@ -120,6 +121,12 @@ class Relay(object):
                 logging.warning('Plugin: {0} not loaded. It has not been '
                                 'configured.'.format(plugin_name))
                 continue
+            try:
+                tags = dict(self.config.items('{}:tags'.format(plugin_name)))
+            except configparser.NoSectionError:
+                pass
+            else:
+                plugin_config['tags'] = tags
             plugin = entrypoint.load()(plugin_config)
             if entrypoint.name == 'handler':
                 try:
@@ -150,6 +157,10 @@ class Relay(object):
                 if readings is None:
                     continue
                 for reading in readings:
+                    if reading is None:
+                        e = 'None reading was received from {}'.format(source)
+                        logger.error(e)
+                        continue
                     for handler in self.handlers.get(reading.reading_type, []):
                         if reading.value is None:
                             logger.warning('None value from {0}'.format(
