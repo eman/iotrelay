@@ -1,8 +1,5 @@
 IoT Relay: Giving Voice to Your Things
 ========================================================================
-
-[![Documentation Status](https://readthedocs.org/projects/iot-relay/badge/?version=latest)](http://iot-relay.readthedocs.io/en/latest/?badge=latest)
-
 Release v1.2.1
 
 In greater and greater numbers, "things" are capable of gathering data
