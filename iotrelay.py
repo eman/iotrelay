@@ -25,7 +25,7 @@ logger = logging.getLogger()
 
 DEFAULT_CONFIG = os.path.join(os.path.expanduser("~"), '.iotrelay.cfg')
 GROUP = 'iotrelay'
-version = "1.2.1"
+version = "1.2.2"
 
 
 class Error(Exception):

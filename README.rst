@@ -1,6 +1,6 @@
 IoT Relay: Giving Voice to Your Things
 ========================================================================
-Release v1.2.1
+Release v1.2.2
 
 In greater and greater numbers, "things" are capable of gathering data
 about their environment. These things have an interface to retrieve the
