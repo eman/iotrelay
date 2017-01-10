@@ -170,7 +170,7 @@ class Relay(object):
                             handler.set_reading(reading)
                         except PluginError as e:
                             logger.error('Unable to send data {0}'.format(e))
-            self.stop_event.wait(1)
+                self.stop_event.wait(2)
 
     def flush_handlers(self):
         flushed = set()
