@@ -52,7 +52,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'IoT Relay'
-copyright = '2016, Emmanuel Levijarvi'
+copyright = '2017, Emmanuel Levijarvi'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -287,7 +287,7 @@ texinfo_documents = [
 epub_title = 'IoT Relay'
 epub_author = 'Emmanuel Levijarvi'
 epub_publisher = 'Emmanuel Levijarvi'
-epub_copyright = '2016, Emmanuel Levijarvi'
+epub_copyright = '2017, Emmanuel Levijarvi'
 
 # The basename for the epub file. It defaults to the project name.
 #epub_basename = 'IoT Relay'
